@@ -19,10 +19,9 @@
  */
 /**
  * 思路：
- * 将所有的特殊情况(IV,IX,XL,XC,CD,CM)从字符串中取出
- * 将剩余的字符根据 字符-数值的映射 计算和s1
- * 所有特殊情况根据其对应的值计算和s2
- * 最终结果为res=s1+s2
+ * 为提高计算速度，在一次循环中的到结果，
+ * 根据字符的对应数值大小比较甄别特殊情况，并按差值计算
+ * 正常情况直接加上对应的数值
  */
 /**
  * @param {string} s
@@ -37,28 +36,15 @@ var romanToInt = function (s) {
         "C": 100,
         "D": 500,
         "M": 1000
-    },
-        SpecialValueMap = {
-            "IV": 4,
-            "IX": 9,
-            "XL": 40,
-            "XC": 90,
-            "CD": 400,
-            "CM": 900
-        }, i, index, res = 0, tem;
-
-    for (i in SpecialValueMap) {
-        index = s.indexOf(i);
-        if (index > -1) {
-            s = s.replace(i, "");
-            res += SpecialValueMap[i];
+    }, res = 0, i;
+    for (i = 0; i < s.length; i++) {
+        if (i + 1 < s.length && NormalValueMap[s[i]] < NormalValueMap[s[i + 1]]) {
+            res += NormalValueMap[s[i + 1]] - NormalValueMap[s[i]];
+            i++;
+        } else {
+            res += NormalValueMap[s[i]];
         }
     }
-
-    for (i = 0; i < s.length; i++) {
-        res += NormalValueMap[s[i]];
-    }
-
     console.log(res);
     return res;
 
