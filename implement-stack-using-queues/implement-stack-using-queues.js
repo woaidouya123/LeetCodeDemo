@@ -34,7 +34,7 @@ MyStack.prototype.push = function(x) {
  * @return {number}
  */
 MyStack.prototype.pop = function() {
-    return this.value.splice(0,1)[0];
+    return this.value.shift();
 };
 
 /**
