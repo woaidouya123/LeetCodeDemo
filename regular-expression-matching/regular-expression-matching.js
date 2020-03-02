@@ -45,6 +45,17 @@
     p = "mis*is*p*."
     输出: false
  */
+
+/**
+ * 调用js的正则匹配
+ * @param {string} s
+ * @param {string} p
+ * @return {boolean}
+ */
+// var isMatch = function(s, p) {
+//     return new RegExp(`^${p}$`,'g').test(s);
+// };
+
 /**
  * 回溯方法解决
  * @param {string} s
